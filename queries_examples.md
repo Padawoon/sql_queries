@@ -2,7 +2,7 @@
 
 #### NESTED (SUBQUERIES):
 ###### IN:
-```
+```sql
 SELECT *
 FROM flight f
 WHERE f.flight_id IN (SELECT p.flight_flight_id
@@ -10,7 +10,7 @@ WHERE f.flight_id IN (SELECT p.flight_flight_id
                       WHERE p.first_name LIKE 'A%')
 ```
 ###### ANOTHER "IN" EXAMPLE:
-```
+```sql
 SELECT f.flight_number
 FROM flight f
 WHERE f.departure_airport_airport_id IN (SELECT a.airport_id
@@ -22,7 +22,7 @@ ORDER BY f.flight_id
 ```
 
 ###### EXISTS:
-```
+```sql
 SELECT *
 FROM flight f
 WHERE EXISTS (SELECT *
@@ -31,7 +31,7 @@ WHERE EXISTS (SELECT *
               AND   p.first_name LIKE 'A%')
 ```
 ###### ANOTHER EXISTS EXAMPLE:
-```
+```sql
 SELECT f.flight_number
 FROM flight f
 WHERE EXISTS (SELECT *
@@ -43,7 +43,7 @@ WHERE EXISTS (SELECT *
 ORDER BY f.flight_id
 ```
 ###### REGEXP:
-```
+```sql
 SELECT f.flight_number
 FROM flight f
 WHERE EXISTS (SELECT *
@@ -53,22 +53,22 @@ WHERE EXISTS (SELECT *
 ORDER BY f.flight_id
 ```
 ###### DOUBLE NESTED SUBQUERY WITH "ALL":
-```
+```sql
 SELECT *
 FROM flight f2
 WHERE f2.flight_charge > ALL (SELECT flight_charge
                               FROM flight f
                               WHERE f.aircraft_aircraft_id IN (SELECT a.aircraft_id FROM aircraft a WHERE a.model LIKE 'Boe%'))
 ```
-#### JOIN:
-```
+#### JOINS:
+```sql
 SELECT *
 FROM passenger p
   JOIN flight f ON p.flight_flight_id = f.flight_id
 WHERE p.first_name LIKE 'A%'
 ```
-###### JOIN AND AGGREGATE FUNCTIONS:
-```
+
+```sql
 SELECT f.flight_id AS ID,
        f.flight_number AS 'Flight Number',
        a.airport_name AS 'From',
@@ -85,8 +85,8 @@ FROM flight f
   LEFT JOIN passenger p ON f.flight_id = p.flight_flight_id
 GROUP BY f.flight_id
 ```
-###### JOIN AND CONCAT FUNCTION :
-```
+
+```sql
 SELECT a.airport_name AS "Departure Airport",
        CONCAT(f.departure_date,' ',f.departure_time) AS Departure,
        a2.airport_name AS "Arrival Airport",
