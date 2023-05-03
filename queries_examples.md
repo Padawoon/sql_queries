@@ -1,7 +1,7 @@
 # sql_queries
 
-## NESTED (SUBQUERIES):
-### IN:
+#### NESTED (SUBQUERIES):
+###### IN:
 ```
 SELECT *
 FROM flight f
@@ -9,7 +9,7 @@ WHERE f.flight_id IN (SELECT p.flight_flight_id
                       FROM passenger p
                       WHERE p.first_name LIKE 'A%')
 ```
-### ANOTHER "IN" EXAMPLE:
+###### ANOTHER "IN" EXAMPLE:
 ```
 SELECT f.flight_number
 FROM flight f
@@ -21,7 +21,7 @@ WHERE f.departure_airport_airport_id IN (SELECT a.airport_id
 ORDER BY f.flight_id
 ```
 
-### EXISTS:
+###### EXISTS:
 ```
 SELECT *
 FROM flight f
@@ -30,7 +30,7 @@ WHERE EXISTS (SELECT *
               WHERE p.flight_flight_id = f.flight_id
               AND   p.first_name LIKE 'A%')
 ```
-### ANOTHER EXISTS EXAMPLE:
+###### ANOTHER EXISTS EXAMPLE:
 ```
 SELECT f.flight_number
 FROM flight f
@@ -42,7 +42,7 @@ WHERE EXISTS (SELECT *
               AND   f.departure_airport_airport_id = a.airport_id)
 ORDER BY f.flight_id
 ```
-### REGEXP:
+###### REGEXP:
 ```
 SELECT f.flight_number
 FROM flight f
@@ -52,7 +52,7 @@ WHERE EXISTS (SELECT *
               AND   f.departure_airport_airport_id = a.airport_id)
 ORDER BY f.flight_id
 ```
-### DOUBLE NESTED SUBQUERY WITH "ALL":
+###### DOUBLE NESTED SUBQUERY WITH "ALL":
 ```
 SELECT *
 FROM flight f2
@@ -60,14 +60,14 @@ WHERE f2.flight_charge > ALL (SELECT flight_charge
                               FROM flight f
                               WHERE f.aircraft_aircraft_id IN (SELECT a.aircraft_id FROM aircraft a WHERE a.model LIKE 'Boe%'))
 ```
-### JOIN:
+#### JOIN:
 ```
 SELECT *
 FROM passenger p
   JOIN flight f ON p.flight_flight_id = f.flight_id
 WHERE p.first_name LIKE 'A%'
 ```
-### JOIN AND AGGREGATE FUNCTIONS:
+###### JOIN AND AGGREGATE FUNCTIONS:
 ```
 SELECT f.flight_id AS ID,
        f.flight_number AS 'Flight Number',
@@ -85,7 +85,7 @@ FROM flight f
   LEFT JOIN passenger p ON f.flight_id = p.flight_flight_id
 GROUP BY f.flight_id
 ```
-### JOIN AND CONCAT FUNCTION :
+###### JOIN AND CONCAT FUNCTION :
 ```
 SELECT a.airport_name AS "Departure Airport",
        CONCAT(f.departure_date,' ',f.departure_time) AS Departure,
